@@ -102,7 +102,7 @@ const nextConfig = {
   };
 
   return config;
-}
+},
   
   // ===== OUTPUT STANDALONE (For Docker) =====
   output: 'standalone',
