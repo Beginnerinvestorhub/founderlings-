@@ -96,15 +96,13 @@ const nextConfig = {
   },
   
   // ===== WEBPACK OPTIMIZATIONS =====
-  webpack: (config: any, { dev, isServer }: { dev: boolean; isServer: boolean }) => {
-    // Optimize moment.js and other large libraries
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      'moment$': 'moment/moment.js',
-    }
-    
-    return config
-  },
+  webpack: (config: any) => {
+  config.resolve.alias = {
+    ...config.resolve.alias,
+  };
+
+  return config;
+}
   
   // ===== OUTPUT STANDALONE (For Docker) =====
   output: 'standalone',
