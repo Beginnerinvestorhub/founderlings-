@@ -2,7 +2,7 @@
 const nextConfig = {
   // ===== CORE CONFIGURATION =====
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify: true, // REMOVED: No longer needed in Next.js 15+
   
   // ===== IMAGE OPTIMIZATION =====
   images: {
@@ -76,11 +76,12 @@ const nextConfig = {
   
   // ===== ENVIRONMENT VARIABLES =====
   env: {
+    // Remove NODE_ENV - it's automatically available
     SITE_URL: process.env.VERCEL_URL 
       ? `https://${process.env.VERCEL_URL}` 
       : 'http://localhost:3000',
     FORMSPREE_ENDPOINT: process.env.FORMSPREE_ENDPOINT || 'https://formspree.io/f/mkooorve',
-    NODE_ENV: process.env.NODE_ENV || 'development',
+    // NODE_ENV: process.env.NODE_ENV || 'development', // REMOVE THIS
   },
   
   // ===== REWRITES & REDIRECTS =====
@@ -105,55 +106,11 @@ const nextConfig = {
       'moment$': 'moment/moment.js',
     }
     
-    // Bundle analyzer (optional - enable for analysis)
-    if (process.env.ANALYZE === 'true') {
-      const withBundleAnalyzer = require('@next/bundle-analyzer')({
-        enabled: true,
-      })
-      return withBundleAnalyzer(config)
-    }
-    
     return config
   },
   
-  // ===== PWA SUPPORT (Optional) =====
-  // Uncomment if you want to add PWA support
-  // pwa: {
-  //   dest: 'public',
-  //   disable: process.env.NODE_ENV === 'development',
-  //   register: true,
-  //   skipWaiting: true,
-  // },
-  
-  // ===== I18N (Optional) =====
-  // i18n: {
-  //   locales: ['en'],
-  //   defaultLocale: 'en',
-  // },
-  
   // ===== OUTPUT STANDALONE (For Docker) =====
   output: 'standalone',
-  
-  // ===== TURBOPACK (Development only - optional) =====
-  // experimental: {
-  //   turbo: {
-  //     rules: {
-  //       '*.svg': {
-  //         loaders: ['@svgr/webpack'],
-  //         as: '*.js',
-  //       },
-  //     },
-  //   },
-  // },
 }
 
-// Conditionally add bundle analyzer in development
-if (process.env.ANALYZE === 'true') {
-  const withBundleAnalyzer = require('@next/bundle-analyzer')({
-    enabled: true,
-  })
-  module.exports = withBundleAnalyzer(nextConfig)
-} else {
-  module.exports = nextConfig
-}
-
+export default nextConfig
