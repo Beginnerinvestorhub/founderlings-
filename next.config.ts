@@ -2,7 +2,6 @@
 const nextConfig = {
   // ===== CORE CONFIGURATION =====
   reactStrictMode: true,
-  // swcMinify: true, // REMOVED: No longer needed in Next.js 15+
   
   // ===== IMAGE OPTIMIZATION =====
   images: {
@@ -76,12 +75,10 @@ const nextConfig = {
   
   // ===== ENVIRONMENT VARIABLES =====
   env: {
-    // Remove NODE_ENV - it's automatically available
     SITE_URL: process.env.VERCEL_URL 
       ? `https://${process.env.VERCEL_URL}` 
       : 'http://localhost:3000',
     FORMSPREE_ENDPOINT: process.env.FORMSPREE_ENDPOINT || 'https://formspree.io/f/mkooorve',
-    // NODE_ENV: process.env.NODE_ENV || 'development', // REMOVE THIS
   },
   
   // ===== REWRITES & REDIRECTS =====
@@ -99,7 +96,7 @@ const nextConfig = {
   },
   
   // ===== WEBPACK OPTIMIZATIONS =====
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config: any, { dev, isServer }: { dev: boolean; isServer: boolean }) => {
     // Optimize moment.js and other large libraries
     config.resolve.alias = {
       ...config.resolve.alias,
