@@ -301,7 +301,7 @@ const config: Config = {
     },
     
     // Add components
-    function({ addComponents, theme }) {
+    function({ addComponents}:any {
       const components = {
         // Mechanical card
         '.mechanica-card': {
