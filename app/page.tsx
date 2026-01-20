@@ -236,35 +236,36 @@ export default function FounderlingsLanding() {
               </div>
             )}
 
-          {/* Story Section */}
-          <div className="mt-12 pt-8 border-t-2 border-[#e8d4b0]">
-            <h3 style={{fontFamily: 'Playfair Display, serif'}} className="text-2xl font-bold text-[#4f738e] mb-4 text-center">
-              Built by a Self-Taught Developer
-            </h3>
-            <p style={{fontFamily: 'Inter, sans-serif'}} className="text-gray-700 leading-relaxed text-center max-w-2xl mx-auto">
-              Started coding in January 2025. Built this entire full-stack AI platform in 10 months—on a 4GB laptop. 
-              No excuses, just execution. Now building the future of investing education.
-            </p>
-            
-            <div className="mt-6 text-center">
-              <a 
-                href="https://beginnerinvestorhub-demo.vercel.app" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-6 py-3 bg-[#4f738e] text-white font-semibold rounded-lg hover:bg-[#385a73] transition-colors"
-                style={{fontFamily: 'Inter, sans-serif'}}
-              >
-                View Live Demo →
-              </a>
+            {/* Story Section */}
+            <div className="mt-12 pt-8 border-t-2 border-[#e8d4b0]">
+              <h3 style={{fontFamily: 'Playfair Display, serif'}} className="text-2xl font-bold text-[#4f738e] mb-4 text-center">
+                Built by a Self-Taught Developer
+              </h3>
+              <p style={{fontFamily: 'Inter, sans-serif'}} className="text-gray-700 leading-relaxed text-center max-w-2xl mx-auto">
+                Started coding in January 2025. Built this entire full-stack AI platform in 10 months—on a 4GB laptop. 
+                No excuses, just execution. Now building the future of investing education.
+              </p>
+              
+              <div className="mt-6 text-center">
+                <a 
+                  href="https://beginnerinvestorhub-demo.vercel.app" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-6 py-3 bg-[#4f738e] text-white font-semibold rounded-lg hover:bg-[#385a73] transition-colors"
+                  style={{fontFamily: 'Inter, sans-serif'}}
+                >
+                  View Live Demo →
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Footer */}
-      <footer className="text-center text-gray-600 text-sm" style={{fontFamily: 'Inter, sans-serif'}}>
-        <p>Limited to first 1,000 members • After that, doors close forever</p>
-      </footer>
+        {/* Footer */}
+        <footer className="text-center text-gray-600 text-sm" style={{fontFamily: 'Inter, sans-serif'}}>
+          <p>Limited to first 1,000 members • After that, doors close forever</p>
+        </footer>
+      </div>
     </div>
   );
-      }
+}
