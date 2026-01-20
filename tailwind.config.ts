@@ -226,7 +226,7 @@ const config: Config = {
   // ===== MECHANICA PLUGINS =====
   plugins: [
     // Add custom utilities
-    function({ addUtilities, theme }) {
+    function({ addUtilities, theme }:any) {
       const newUtilities = {
         // Mechanical text shadows
         '.text-shadow-mechanica': {
