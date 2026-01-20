@@ -1,28 +1,122 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    // ===== LANGUAGE & ENVIRONMENT =====
+    "target": "ES2022",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
+    "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
+    "allowJs": true,
+    "checkJs": true,
+    
+    // ===== TYPE CHECKING =====
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    
+    // ===== MODULES =====
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@/components/*": ["./components/*"],
+      "@/app/*": ["./app/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/types/*": ["./types/*"],
+      "@/utils/*": ["./utils/*"],
+      "@/hooks/*": ["./hooks/*"],
+      "@/config/*": ["./config/*"]
+    },
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "preserveSymlinks": true,
+    
+    // ===== EMIT =====
+    "noEmit": true,
     "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    
+    // ===== INTEROP CONSTRAINTS =====
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    
+    // ===== COMPLETENESS =====
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    
+    // ===== OUTPUT FORMATTING =====
+    "pretty": true,
+    
+    // ===== ADVANCED =====
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "paths": {
-      "@/*": ["./*"]
-    }
+    
+    // ===== MECHANICAL DESIGN SYSTEM SPECIFIC =====
+    "types": ["node", "react", "react-dom", "next"],
+    
+    // ===== DECLARATION =====
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": true,
+    
+    // ===== EXPERIMENTAL =====
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  
+  // ===== INCLUDE PATTERNS =====
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "types/**/*.d.ts",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ],
+  
+  // ===== EXCLUDE PATTERNS =====
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*",
+    ".next",
+    "dist",
+    "build",
+    "coverage",
+    "**/*.js",
+    "**/*.mjs",
+    "**/*.cjs"
+  ],
+  
+  // ===== EXTENDS =====
+  "extends": [],
+  
+  // ===== TYPE ACQUISITION =====
+  "typeAcquisition": {
+    "enable": false
+  },
+  
+  // ===== REFERENCES =====
+  "references": []
 }
-
