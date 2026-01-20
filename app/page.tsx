@@ -1,12 +1,33 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function FounderlingsLanding() {
   const [email, setEmail] = useState('');
   const [why, setWhy] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [count, setCount] = useState(347); // You can manually update this
+  const [count, setCount] = useState(null); // Changed from 347 to null for loading state
+  
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYVPJZo8ZJy6fLkPeGpAqU1m-gfCLGUDiOI8rsW1ryvOqpiAUrAed-BzUkuiqkpMbT0q98bPntSMLp/pub?output=csv";
+
+  const fetchCountFromSheet = async () => {
+    try {
+      const res = await fetch(SHEET_CSV_URL);
+      const text = await res.text();
+
+      // Count rows and subtract header row
+      const rows = text.trim().split("\n").filter(row => row.trim() !== "");
+      const actualCount = rows.length > 0 ? rows.length - 1 : 0;
+      setCount(actualCount);
+    } catch (err) {
+      console.error("Failed to fetch sheet:", err);
+      setCount(347); // Fallback to original count if fetch fails
+    }
+  };
+
+  useEffect(() => {
+    fetchCountFromSheet();
+  }, []);
 
   const handleSubmit = async () => {
     if (!email || !email.includes('@')) {
@@ -31,7 +52,9 @@ export default function FounderlingsLanding() {
       if (!response.ok) throw new Error('Submission failed');
       
       setSubmitted(true);
-      setCount(prev => prev + 1);
+      
+      // Refresh count from sheet after successful submit
+      fetchCountFromSheet();
       
       // Reset form after 3 seconds
       setTimeout(() => {
@@ -45,8 +68,9 @@ export default function FounderlingsLanding() {
     }
   };
 
-  const spotsRemaining = 1000 - count;
-  const percentFilled = (count / 1000) * 100;
+  // Calculate spots and percentage (use fallback if count is null)
+  const spotsRemaining = count !== null ? 1000 - count : 1000 - 347;
+  const percentFilled = count !== null ? (count / 1000) * 100 : 34.7;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-[#f5e6d3] p-4 md:p-8">
@@ -132,7 +156,7 @@ export default function FounderlingsLanding() {
           <div className="p-6 bg-gradient-to-r from-[#f5e6d3] to-white">
             <div className="flex justify-between items-center mb-3">
               <span style={{fontFamily: 'Roboto Mono, monospace'}} className="text-3xl font-bold text-[#4f738e]">
-                {count} / 1,000
+                {count !== null ? count : "..."} / 1,000
               </span>
               <span style={{fontFamily: 'Inter, sans-serif'}} className="text-lg font-semibold text-[#b87333]">
                 {spotsRemaining} spots remaining
