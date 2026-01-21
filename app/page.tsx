@@ -10,20 +10,35 @@ export default function FounderlingsLanding() {
   
   const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYVPJZo8ZJy6fLkPeGpAqU1m-gfCLGUDiOI8rsW1ryvOqpiAUrAed-BzUkuiqkpMbT0q98bPntSMLp/pub?output=csv";
 
-  const fetchCountFromSheet = async () => {
-    try {
-      const res = await fetch(SHEET_CSV_URL);
-      const text = await res.text();
+ const fetchCountFromSheet = async () => {
+  try {
+    const res = await fetch(SHEET_CSV_URL, { cache: "no-store" });
 
-      // Count rows and subtract header row
-      const rows = text.trim().split("\n").filter(row => row.trim() !== "");
-      const actualCount = rows.length > 0 ? rows.length - 1 : 0;
-      setCount(actualCount);
-    } catch (err) {
-      console.error("Failed to fetch sheet:", err);
-      setCount(347); // Fallback to original count if fetch fails
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
     }
-  };
+
+    const text = await res.text();
+
+    // DEBUG LOG
+    console.log("CSV TEXT:", text);
+
+    const rows = text
+      .trim()
+      .split("\n")
+      .filter(row => row.trim() !== "");
+
+    // subtract header row
+    const actualCount = Math.max(0, rows.length - 1);
+
+    console.log("Parsed count:", actualCount);
+
+    setCount(actualCount);
+  } catch (err) {
+    console.error("Failed to fetch sheet:", err);
+    setCount(347); // fallback
+  }
+};
 
   useEffect(() => {
     fetchCountFromSheet();
