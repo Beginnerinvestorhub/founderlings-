@@ -12,11 +12,14 @@ export default function FounderlingsLanding() {
 
  const fetchCountFromSheet = async () => {
   try {
-    const res = await fetch(SHEET_CSV_URL, { cache: "no-store" });
-
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}`);
-    }
+    const res = await fetch("/api/count");
+    const data = await res.json();
+    setCount(data.count);
+  } catch (err) {
+    console.error("Failed to fetch sheet:", err);
+    setCount(347);
+  }
+};
 
     const text = await res.text();
 
