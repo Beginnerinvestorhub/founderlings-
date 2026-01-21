@@ -6,42 +6,18 @@ export default function FounderlingsLanding() {
   const [email, setEmail] = useState('');
   const [why, setWhy] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [count, setCount] = useState(null); // Changed from 347 to null for loading state
-  
-  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYVPJZo8ZJy6fLkPeGpAqU1m-gfCLGUDiOI8rsW1ryvOqpiAUrAed-BzUkuiqkpMbT0q98bPntSMLp/pub?output=csv";
+  const [count, setCount] = useState(null); // loading state
 
- const fetchCountFromSheet = async () => {
-  try {
-    const res = await fetch("/api/count");
-    const data = await res.json();
-    setCount(data.count);
-  } catch (err) {
-    console.error("Failed to fetch sheet:", err);
-    setCount(347);
-  }
-};
-
-    const text = await res.text();
-
-    // DEBUG LOG
-    console.log("CSV TEXT:", text);
-
-    const rows = text
-      .trim()
-      .split("\n")
-      .filter(row => row.trim() !== "");
-
-    // subtract header row
-    const actualCount = Math.max(0, rows.length - 1);
-
-    console.log("Parsed count:", actualCount);
-
-    setCount(actualCount);
-  } catch (err) {
-    console.error("Failed to fetch sheet:", err);
-    setCount(347); // fallback
-  }
-};
+  const fetchCountFromSheet = async () => {
+    try {
+      const res = await fetch("/api/count");
+      const data = await res.json();
+      setCount(data.count);
+    } catch (err) {
+      console.error("Failed to fetch sheet:", err);
+      setCount(347); // fallback
+    }
+  };
 
   useEffect(() => {
     fetchCountFromSheet();
