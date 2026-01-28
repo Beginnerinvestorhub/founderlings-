@@ -6,7 +6,7 @@ export default function FounderlingsLanding() {
   const [email, setEmail] = useState('');
   const [why, setWhy] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [count, setCount] = useState(null); // loading state
+  const [count, setCount] = useState<number | null>(null);
 
   const fetchCountFromSheet = async () => {
     try {
